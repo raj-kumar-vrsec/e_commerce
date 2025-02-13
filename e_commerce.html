@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Product Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 6%;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 0 5%;
+        }
+
+        .product-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-image:hover img {
+            transform: scale(1.02);
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .price {
+            font-size: 2rem;
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .description {
+            color: #64748b;
+            line-height: 1.8;
+        }
+
+        .add-to-cart {
+            align-self: flex-start;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 1.2rem 2.4rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .reviews-section {
+            margin: 4rem 0;
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            color: #1e293b;
+        }
+
+        .review-card {
+            padding: 2rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .rating {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .star {
+            color: #f59e0b;
+            font-size: 1.4rem;
+        }
+
+        .review-text {
+            color: #475569;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .review-author {
+            color: #64748b;
+            font-style: italic;
+        }
+
+       
+        .related-products {
+            margin: 4rem 0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .related-product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .related-product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .related-product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .related-product-info {
+            padding: 1.5rem;
+        }
+
+        .related-product-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        .related-price {
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        
+        @media (max-width: 1024px) {
+            .product-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .product-image img {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .product-section {
+                padding: 2rem;
+            }
+
+            .product-title {
+                font-size: 2rem;
+            }
+
+            .container {
+                margin-top: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 1rem 5%;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .product-section {
+                padding: 1.5rem;
+            }
+
+            .product-image img {
+                height: 300px;
+            }
+
+            .add-to-cart {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">E-commerce</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section class="product-section">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Wireless Headphones">
+            </div>
+            <div class="product-info">
+                <h1 class="product-title">Premium Wireless Headphones</h1>
+                <p class="price">$299.99</p>
+                <p class="description">
+                    Experience crystal-clear sound with our premium wireless headphones. Featuring active noise cancellation, 30-hour battery life, and premium comfort design. Perfect for music lovers and professionals alike.
+                </p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </section>
+
+        <section class="reviews-section">
+            <h2 class="section-title">Customer Reviews</h2>
+            <div class="review-card">
+                <div class="rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+                <p class="review-text">
+                    These headphones are amazing! The noise cancellation works perfectly and the sound quality is incredible.
+                </p>
+                <p class="review-author">Sarah Johnson</p>
+            </div>
+            <div class="review-card">
+                <div class="rating">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">☆</span>
+                </div>
+                <p class="review-text">
+                    Great product overall, but wish the battery life was slightly longer. Still highly recommend!
+                </p>
+                <p class="review-author">Mike Chen</p>
+            </div>
+        </section>
+
+        <section class="related-products">
+            <h2 class="section-title">Related Products</h2>
+            <div class="products-grid">
+                <div class="related-product-card">
+                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wireless Earbuds" class="related-product-image">
+                    <div class="related-product-info">
+                        <h3 class="related-product-title">Wireless Sport Earbuds</h3>
+                        <p class="related-price">$199.99</p>
+                    </div>
+                </div>
+                <div class="related-product-card">
+                    <img src="https://images.unsplash.com/photo-1504274066651-8d31a536b11a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Bluetooth Speaker" class="related-product-image">
+                    <div class="related-product-info">
+                        <h3 class="related-product-title">Portable Bluetooth Speaker</h3>
+                        <p class="related-price">$149.99</p>
+                    </div>
+                </div>
+                <div class="related-product-card">
+                    <img src="https://images.unsplash.com/photo-1590658006821-04f4008d5717?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Smart Watch" class="related-product-image">
+                    <div class="related-product-info">
+                        <h3 class="related-product-title">Smart Watch Series 5</h3>
+                        <p class="related-price">$399.99</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
